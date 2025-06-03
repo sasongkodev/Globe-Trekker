@@ -7,7 +7,8 @@ import {
   FaPhoneAlt,
   FaUser,
 } from "react-icons/fa";
-import { Link } from "react-scroll";
+import { Link } from "react-scroll"; // Untuk scroll section
+import { Link as RouterLink } from "react-router-dom"; // Untuk navigasi halaman
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,12 +16,11 @@ const Navbar = () => {
   const [destinationsOpen, setDestinationsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
-  // Efek sticky header
+  // Efek sticky header dan highlight active section
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
 
-      // Update active section based on scroll position
       const sections = [
         "home",
         "about",
@@ -128,10 +128,22 @@ const Navbar = () => {
                 <FaSearch className="text-lg" />
               </button>
 
-              <button className="flex items-center space-x-2 text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-5 py-2.5 rounded-lg font-medium transition-all shadow-md hover:shadow-lg">
+              {/* Tombol Masuk */}
+              <RouterLink
+                to="/login"
+                className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+              >
+                Masuk
+              </RouterLink>
+
+              {/* Tombol Daftar */}
+              <RouterLink
+                to="/register"
+                className="flex items-center space-x-2 text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-5 py-2.5 rounded-lg font-medium transition-all shadow-md hover:shadow-lg"
+              >
                 <FaUser className="text-sm" />
                 <span>Daftar</span>
-              </button>
+              </RouterLink>
             </div>
           </div>
 
@@ -217,15 +229,25 @@ const Navbar = () => {
             </ul>
 
             <div className="mt-6 pt-4 border-t border-gray-200 flex flex-col gap-3">
-              <button className="w-full flex items-center justify-center space-x-2 text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-5 py-3 rounded-lg font-medium transition-all">
+              {/* Tombol Daftar Akun di Mobile */}
+              <RouterLink
+                to="/register"
+                className="w-full flex items-center justify-center space-x-2 text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 px-5 py-3 rounded-lg font-medium transition-all"
+                onClick={() => setIsOpen(false)}
+              >
                 <FaUser className="text-sm" />
                 <span>Daftar Akun</span>
-              </button>
+              </RouterLink>
 
-              <button className="w-full flex items-center justify-center space-x-2 text-blue-600 border border-blue-600 hover:bg-blue-50 px-5 py-3 rounded-lg font-medium transition-colors">
-                <FaPhoneAlt className="text-sm" />
-                <span>Hubungi Kami</span>
-              </button>
+              {/* Tombol Login di Mobile */}
+              <RouterLink
+                to="/login"
+                className="w-full flex items-center justify-center space-x-2 text-blue-600 border border-blue-600 hover:bg-blue-50 px-5 py-3 rounded-lg font-medium transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                <FaUser className="text-sm" />
+                <span>Masuk</span>
+              </RouterLink>
             </div>
           </div>
         )}
